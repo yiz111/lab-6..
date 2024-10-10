@@ -1,0 +1,177 @@
+def display_numbers(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        for line in lines:
+            print(line.strip())
+    except FileNotFoundError:
+        print("File not found.")
+
+display_numbers("numbers.txt")
+
+
+
+def display_file_head(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        for i in range(min(5, len(lines))):
+            print(lines[i].strip())
+    except FileNotFoundError:
+        print("File not found.")
+
+file_name = input("Enter the name of the file: ")
+display_file_head(file_name)
+
+
+def display_file_with_line_numbers(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        for i, line in enumerate(lines, start=1):
+            print(f"{i}: {line.strip()}")
+    except FileNotFoundError:
+        print("File not found.")
+
+file_name = input("Enter the name of the file: ")
+display_file_with_line_numbers(file_name)
+
+def count_items(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        count = len(lines)
+        print(count)
+    except FileNotFoundError:
+        print("File not found.")
+
+file_name = "names.txt"
+count_items(file_name)
+
+
+def sum_numbers(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        total = sum(int(line.strip()) for line in lines)
+        print(total)
+    except FileNotFoundError:
+        print("File not found.")
+    except ValueError:
+        print("File contains non-integer values.")
+
+file_name = "numbers.txt"
+sum_numbers(file_name)
+
+
+def average_numbers(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        numbers = [int(line.strip()) for line in lines]
+        if numbers:
+            average = sum(numbers) / len(numbers)
+            print(average)
+        else:
+            print("NaN")
+    except FileNotFoundError:
+        print("File not found.")
+    except ValueError:
+        print("File contains non-integer values.")
+
+file_name = "numbers.txt"
+average_numbers(file_name)
+
+
+
+import random
+
+def write_random_numbers(file_name, count):
+    try:
+        with open(file_name, 'w') as file:
+            for _ in range(count):
+                number = random.randint(1, 500)
+                file.write(f"{number}\n")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+file_name = "random_numbers.txt"
+count = int(input("Enter how many random numbers to generate: "))
+write_random_numbers(file_name, count)
+
+
+
+
+
+def read_random_numbers(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+        
+        numbers = [int(line.strip()) for line in lines]
+        total = sum(numbers)
+        count = len(numbers)
+        
+        for number in numbers:
+            print(number)
+        
+        print(f"Total: {total}")
+        print(f"Count: {count}")
+    except FileNotFoundError:
+        print("File not found.")
+    except ValueError:
+        print("File contains invalid data.")
+
+file_name = "random_numbers.txt"
+read_random_numbers(file_name)
+
+
+
+def average_numbers(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+
+        numbers = []
+        for line in lines:
+            try:
+                number = int(line.strip())
+                numbers.append(number)
+            except ValueError:
+                print(f"Error: Could not convert '{line.strip()}' to an integer.")
+
+        if numbers:
+            average = sum(numbers) / len(numbers)
+            print(average)
+        else:
+            print("NaN")
+    except IOError:
+        print("Error: Unable to open or read from file.")
+
+file_name = "numbers.txt"
+average_numbers(file_name)
+
+
+def save_golf_scores(file_name):
+    try:
+        with open(file_name, 'w') as file:
+            while True:
+                name = input("Enter the player's name (or 'q' to quit): ")
+                if name.lower() == 'q':
+                    break
+                try:
+                    score = int(input(f"Enter the score for {name}: "))
+                    file.write(f"{name},{score}\n")
+                except ValueError:
+                    print("Invalid score. Please enter a valid number.")
+    except IOError:
+        print("Error: Unable to write to file.")
+
+file_name = "golf.txt"
+save_golf_scores(file_name)
